@@ -20,16 +20,16 @@ def process_city(city: str) -> dict | None:
     cached_weather = get_cached_weather(city)
     if cached_weather:
         log_weather_response(city, cached_weather)
-        return {"city": city, "weather": cached_weather, "source": "cache local"}
+        return {"city": city, "weather": cached_weather, "source": "local cache"}
 
     try:
         lat, lon = get_coordinates(city)
         data = get_weather(lat, lon)
     except ValueError as error:
-        print(f"Erro em {city}: {error}")
+        print(f"Error for {city}: {error}")
         return
     except requests.RequestException:
-        print(f"Erro em {city}: nao foi possivel consultar a API no momento.")
+        print(f"Error for {city}: the API could not be reached right now.")
         return None
 
     set_cached_weather(city, data)
@@ -39,10 +39,10 @@ def process_city(city: str) -> dict | None:
 
 def main() -> None:
     """Run the command-line workflow for one or more cities."""
-    raw_cities = input("Digite uma ou mais cidades separadas por virgula: ").strip()
+    raw_cities = input("Enter one or more cities separated by commas: ").strip()
     cities = parse_cities(raw_cities)
     if not cities:
-        print("Informe pelo menos uma cidade valida para realizar a consulta.")
+        print("Please enter at least one valid city to run the lookup.")
         return
 
     results = []
@@ -52,7 +52,7 @@ def main() -> None:
             results.append(result)
 
     if not results:
-        print("Nenhuma consulta foi concluida com sucesso.")
+        print("No lookup was completed successfully.")
         return
 
     show_comparison(results)

@@ -1,119 +1,119 @@
-# Weather App CLI
+# 🌦️ Weather App CLI
 
-Aplicacao de linha de comando em Python para consultar o clima atual e a previsao de varios dias para uma ou mais cidades usando a API da Open-Meteo.
+A Python command-line application for checking current weather conditions and a multi-day forecast for one or more cities using the Open-Meteo API.
 
-## Visao Geral
+## 📌 Overview
 
-O projeto recebe uma ou mais cidades, converte cada nome em coordenadas geograficas e consulta tanto as condicoes atuais quanto a previsao diaria para exibir um resumo claro no terminal.
+This project accepts one or more city names, converts each name into geographic coordinates, and then queries both current conditions and the daily forecast to display a clear summary in the terminal.
 
-Fluxo principal:
+Main flow:
 
-1. Ler uma lista de cidades informada pelo usuario.
-2. Buscar latitude e longitude de cada cidade na Geocoding API da Open-Meteo.
-3. Consultar o clima atual e a previsao de 5 dias na Forecast API.
-4. Exibir uma tabela comparativa entre cidades.
-5. Mostrar temperatura, umidade, velocidade do vento, precipitacao, descricao do clima e previsao diaria.
-6. Registrar cada resposta consultada em arquivo local.
-7. Reaproveitar dados em cache quando ainda estiverem validos por 1 hora.
+1. Read a list of cities entered by the user.
+2. Look up the latitude and longitude for each city with the Open-Meteo Geocoding API.
+3. Fetch the current weather and a 5-day forecast from the Forecast API.
+4. Display a comparison table across cities.
+5. Show temperature, humidity, wind speed, precipitation, weather description, and daily forecast details.
+6. Save responses to a local file when logging is enabled.
+7. Reuse cached data when it is still valid for up to 1 hour.
 
-## Destaques
+## ✨ Highlights
 
-- Interface simples e objetiva no terminal
-- Busca automatica de coordenadas por nome da cidade
-- Consulta de varias cidades em uma unica execucao
-- Comparacao entre cidades em formato de tabela
-- Exibicao de temperatura, umidade, velocidade do vento e precipitacao
-- Previsao de 5 dias com maximas e minimas
-- Traducao basica do `weathercode` para descricao legivel
-- Tratamento de erros para entrada invalida, cidade nao encontrada e falhas de conexao
-- Registro das respostas em arquivo para historico simples
-- Cache local com validade de 1 hora
+- Simple and objective terminal interface.
+- Automatic coordinate lookup by city name.
+- Support for multiple cities in a single run.
+- Side-by-side comparison in a table layout.
+- Display of temperature, humidity, wind speed, and precipitation.
+- 5-day forecast with highs and lows.
+- Basic translation of `weathercode` values into readable descriptions.
+- Error handling for invalid input, city not found, and connection failures.
+- Local cache with a 1-hour lifetime.
+- Modular structure with automated tests.
 
-## Instalacao
+## 🛠️ Installation
 
-### Pre-requisitos
+### Prerequisites
 
-- Python 3.10 ou superior
+- Python 3.10 or higher
 - `pip`
 
-### Passos
+### Steps
 
 ```bash
-git clone <URL_DO_SEU_REPOSITORIO>
+git clone <YOUR_REPOSITORY_URL>
 cd weather-app/src
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Guia de Uso
+## 🚀 Usage
 
-Execute com:
+Run:
 
 ```bash
 python main.py
 ```
 
-Depois disso, informe a cidade desejada no terminal.
+Then enter the desired city name in the terminal.
 
-Voce pode informar varias cidades separadas por virgula.
+You can enter multiple cities separated by commas.
 
-## Exemplo de Resultado
+## 🖥️ Example Output
 
 ```text
-Digite uma ou mais cidades separadas por virgula: Sao Paulo, Rio de Janeiro
+Enter one or more cities separated by commas: Sao Paulo, Rio de Janeiro
 
-Comparacao entre cidades
-+----------------+--------+---------+------------+---------+----------------------+--------------+
-| Cidade         | Temp.  | Umidade | Vento      | Precip. | Condicao             | Origem       |
-+----------------+--------+---------+------------+---------+----------------------+--------------+
-| Sao Paulo      | 24.1 C | 78 %    | 12.3 km/h  | 0.4 mm  | Parcialmente nublado | API Open-Meteo |
-| Rio de Janeiro | 28.0 C | 70 %    | 9.8 km/h   | 0.0 mm  | Ceu limpo            | cache local  |
-+----------------+--------+---------+------------+---------+----------------------+--------------+
+City comparison
++----------------+--------+----------+------------+---------+----------------+--------------+
+| City           | Temp.  | Humidity | Wind       | Precip. | Condition      | Source       |
++----------------+--------+----------+------------+---------+----------------+--------------+
+| Sao Paulo      | 24.1 C | 78 %     | 12.3 km/h  | 0.4 mm  | Partly cloudy  | API Open-Meteo |
+| Rio de Janeiro | 28.0 C | 70 %     | 9.8 km/h   | 0.0 mm  | Clear sky      | local cache  |
++----------------+--------+----------+------------+---------+----------------+--------------+
 
 ================================================
-Clima atual - Sao Paulo
+Current weather - Sao Paulo
 ================================================
-Origem dos dados: API Open-Meteo
-Temperatura: 24.1 C
-Umidade: 78 %
-Velocidade do vento: 12.3 km/h
-Precipitacao: 0.4 mm
-Condicao: Parcialmente nublado
-Atualizado em: 2026-04-17T21:00
+Data source: API Open-Meteo
+Temperature: 24.1 C
+Humidity: 78 %
+Wind speed: 12.3 km/h
+Precipitation: 0.4 mm
+Condition: Partly cloudy
+Updated at: 2026-04-17T21:00
 
-Previsao para os proximos dias - Sao Paulo
+Forecast for the next few days - Sao Paulo
 +------------+--------+--------+
-| Data       | Maxima | Minima |
+| Date       | High   | Low    |
 +------------+--------+--------+
 | 2026-04-18 | 26.0 C | 18.0 C |
 | 2026-04-19 | 27.0 C | 19.0 C |
 +------------+--------+--------+
 ```
 
-## Funcionalidades
+## ⚙️ Features
 
-- Consulta de clima atual por nome da cidade
-- Processamento de varias cidades na mesma execucao
-- Geocodificacao automatica usando a Open-Meteo
-- Comparacao lado a lado entre cidades em tabela
-- Exibicao de temperatura, umidade, velocidade do vento e precipitacao
-- Previsao de 5 dias com temperaturas maximas e minimas
-- Resposta formatada para leitura rapida no terminal
-- Mensagens de erro mais amigaveis
-- Registro das respostas em `weather_log.jsonl`
-- Cache local em `weather_cache.json`
+- Current weather lookup by city name
+- Processing of multiple cities in the same execution
+- Automatic geocoding through Open-Meteo
+- Side-by-side comparison table for cities
+- Display of temperature, humidity, wind speed, and precipitation
+- 5-day forecast with daily highs and lows
+- Terminal-friendly formatted output
+- Clearer error messages
+- Response logging to `weather_log.jsonl` when enabled
+- Local caching in `weather_cache.json`
 
-## Privacidade e Armazenamento Local
+## 🔒 Privacy and Local Storage
 
-O projeto nao usa chave de API e nao solicita GPS do dispositivo. A localizacao usada na consulta e inferida apenas a partir do nome da cidade digitado pelo usuario.
+This project does not use an API key and does not request device GPS access. The location used in each lookup is inferred only from the city name typed by the user.
 
-Por padrao:
+By default:
 
-- o cache local fica ativado em `weather_cache.json` por ate 1 hora
-- o log detalhado fica desativado para reduzir persistencia desnecessaria do historico de consultas
+- Local caching is enabled in `weather_cache.json` for up to 1 hour.
+- Detailed logging is disabled to reduce unnecessary persistence of lookup history.
 
-Se quiser alterar esse comportamento, configure variaveis de ambiente antes de executar:
+If you want to change this behavior, configure environment variables before running:
 
 ```powershell
 $env:WEATHER_APP_ENABLE_CACHE="1"
@@ -121,53 +121,53 @@ $env:WEATHER_APP_ENABLE_LOGGING="0"
 python main.py
 ```
 
-Valores aceitos: `1`, `true`, `yes`, `on`, `0`, `false`, `no`, `off`.
+Accepted values: `1`, `true`, `yes`, `on`, `0`, `false`, `no`, `off`.
 
-Se voce compartilhar este projeto ou rodar em uma maquina de terceiros, trate `weather_cache.json` e `weather_log.jsonl` como dados locais de uso e historico.
+If you share this project or run it on a third-party machine, treat `weather_cache.json` and `weather_log.jsonl` as local usage and history data.
 
-## Tratamento de Erros
+## 🧯 Error Handling
 
-O app lida com os casos mais comuns:
+The app handles the most common cases:
 
-- Entrada vazia
-- Cidade nao encontrada
-- Falha de conexao ou erro HTTP
-- Resposta incompleta da API
+- Empty input
+- City not found
+- Connection failure or HTTP error
+- Incomplete API response
 
-Quando uma cidade falha, as outras ainda continuam sendo processadas.
+When one city fails, the others are still processed.
 
-Se houver cache valido para a cidade, o app pode responder sem nova chamada a API.
+If a valid cache entry exists for a city, the app can respond without making a new API request.
 
-## Registro em Arquivo
+## 📝 File Logging
 
-Cada consulta bem-sucedida e salva no arquivo `weather_log.jsonl`, em formato JSON Lines.
+Each successful lookup can be saved to `weather_log.jsonl` in JSON Lines format when logging is enabled.
 
-Esse arquivo pode ser usado para:
+This file can be used to:
 
-- manter um historico simples das consultas
-- inspecionar respostas da API
-- servir de base para analises futuras
+- Keep a simple lookup history
+- Inspect API responses
+- Serve as a base for future analysis
 
-## Cache de Dados
+## ⚡ Data Cache
 
-O projeto salva consultas em `weather_cache.json` e reutiliza os dados por ate 1 hora quando `WEATHER_APP_ENABLE_CACHE` estiver ativado.
+The project stores lookups in `weather_cache.json` and reuses the data for up to 1 hour when `WEATHER_APP_ENABLE_CACHE` is enabled.
 
-Isso ajuda a:
+This helps:
 
-- reduzir chamadas redundantes a API
-- melhorar o tempo de resposta para cidades consultadas recentemente
-- demonstrar uma funcionalidade avancada comum em apps reais
+- Reduce redundant API calls
+- Improve response time for recently queried cities
+- Demonstrate a practical feature often found in real applications
 
-## Informacoes da API
+## 🌐 API Information
 
-Este projeto usa a [Open-Meteo](https://open-meteo.com/) como fonte de dados.
+This project uses [Open-Meteo](https://open-meteo.com/) as its data source.
 
-### Endpoints utilizados
+### Endpoints used
 
 - `https://geocoding-api.open-meteo.com/v1/search`
 - `https://api.open-meteo.com/v1/forecast`
 
-### Campos consultados
+### Fields used
 
 - `latitude`
 - `longitude`
@@ -180,15 +180,15 @@ Este projeto usa a [Open-Meteo](https://open-meteo.com/) como fonte de dados.
 - `temperature_2m_max`
 - `temperature_2m_min`
 
-## Licencas e Atribuicoes
+## 📄 Licenses and Attribution
 
-- Dependencia Python: `requests`, sob licenca Apache 2.0
-- Dados meteorologicos: Open-Meteo, com dados da API sob licenca CC BY 4.0
-- Termos de uso da Open-Meteo: o plano gratuito se aplica a uso nao comercial, sujeito aos limites e condicoes publicados pelo provedor
+- Python dependency: `requests`, licensed under Apache 2.0
+- Weather data: Open-Meteo, with API data licensed under CC BY 4.0
+- Open-Meteo terms of use: the free plan applies to non-commercial usage, subject to the provider's published limits and conditions
 
-Detalhes e links oficiais estao em [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+Official details and links are available in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-## Estrutura do Projeto
+## 📁 Project Structure
 
 ```text
 src/
@@ -198,52 +198,54 @@ src/
 |-- display.py
 |-- cache.py
 |-- logger.py
+|-- config.py
 |-- tests/
 |   |-- test_weather_app.py
 |-- requirements.txt
 |-- README.md
+|-- THIRD_PARTY_NOTICES.md
 |-- .gitignore
 ```
 
-## Testes
+## ✅ Tests
 
-O projeto inclui cenarios de teste automatizados com `unittest`.
+The project includes automated test scenarios built with `unittest`.
 
-Para executar:
+To run them:
 
 ```bash
 python -m unittest tests.test_weather_app
 ```
 
-Cenarios cobertos:
+Covered scenarios:
 
-- parse da lista de cidades separadas por virgula
-- tratamento de entrada vazia
-- processamento bem-sucedido de uma cidade
-- tratamento de cidade nao encontrada sem interromper o fluxo
-- registro da resposta durante o processamento bem-sucedido
-- validacao de dados atuais incompletos
-- validacao de previsao diaria incompleta
-- normalizacao da chave de cache
+- Parsing a comma-separated city list
+- Handling empty input
+- Successful processing of a valid city
+- Handling an unknown city without interrupting the flow
+- Logging during successful processing
+- Validation of incomplete current weather data
+- Validation of incomplete daily forecast data
+- Cache key normalization
 
-## Melhorias Futuras
+## 🔮 Future Improvements
 
-- Aceitar argumentos pela linha de comando
-- Registrar consultas recentes
-- Exportar comparacoes para CSV
-- Permitir configurar o tempo de validade do cache
+- Accept command-line arguments
+- Store recent lookups
+- Export comparisons to CSV
+- Allow cache lifetime configuration
+- Build a GUI or web version
 
-## Tecnologias
+## 💻 Technologies
 
 - Python
 - Requests
 - Open-Meteo API
+- Unittest
 
-## Portfolio Tips
+## 👨‍💻 Author
 
-Para o repositorio ficar ainda mais forte no GitHub, voce pode adicionar depois:
+Project created by **Rafael Alves**.
 
-- screenshot real do terminal em funcionamento
-- GIF curto mostrando a execucao
-- descricao curta do projeto na pagina principal do repositorio
-- topicos como `python`, `api`, `weather`, `cli`
+- GitHub: [rafael-alves-teixeira](https://github.com/rafael-alves-teixeira)
+- Portfolio: [rafael-alves-teixeira.github.io/portfolio](https://rafael-alves-teixeira.github.io/portfolio/)

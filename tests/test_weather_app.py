@@ -35,7 +35,7 @@ class WeatherAppTests(unittest.TestCase):
         with redirect_stdout(output):
             main.main()
 
-        self.assertIn("Informe pelo menos uma cidade valida", output.getvalue())
+        self.assertIn("Please enter at least one valid city", output.getvalue())
         mocked_input.assert_called_once()
 
     @patch("main.show_weather")
@@ -86,14 +86,14 @@ class WeatherAppTests(unittest.TestCase):
         mocked_show_weather.assert_not_called()
         self.assertEqual(result["source"], "API Open-Meteo")
 
-    @patch("main.get_coordinates", side_effect=ValueError("Cidade 'Atlantida' nao encontrada."))
+    @patch("main.get_coordinates", side_effect=ValueError("City 'Atlantida' was not found."))
     def test_process_city_reports_city_not_found(self, mocked_get_coordinates) -> None:
         output = io.StringIO()
 
         with redirect_stdout(output):
             main.process_city("Atlantida")
 
-        self.assertIn("Erro em Atlantida", output.getvalue())
+        self.assertIn("Error for Atlantida", output.getvalue())
         mocked_get_coordinates.assert_called_once_with("Atlantida")
 
     def test_build_cache_key_normalizes_city_name(self) -> None:
@@ -142,7 +142,7 @@ class WeatherAppTests(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             weather.validate_weather_data(incomplete_data)
 
-        self.assertIn("Campos ausentes", str(context.exception))
+        self.assertIn("Missing fields", str(context.exception))
 
     def test_validate_forecast_data_raises_for_missing_fields(self) -> None:
         incomplete_forecast = {
@@ -153,7 +153,7 @@ class WeatherAppTests(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             weather.validate_forecast_data(incomplete_forecast)
 
-        self.assertIn("previsao diaria incompleta", str(context.exception))
+        self.assertIn("incomplete daily forecast", str(context.exception))
 
 
 if __name__ == "__main__":

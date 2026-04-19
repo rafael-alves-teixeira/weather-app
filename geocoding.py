@@ -23,13 +23,13 @@ def get_coordinates(city: str) -> tuple[float, float]:
     """
     response = requests.get(
         GEOCODING_URL,
-        params={"name": city, "count": 1, "language": "pt"},
+        params={"name": city, "count": 1, "language": "en"},
         timeout=REQUEST_TIMEOUT,
     )
     response.raise_for_status()
 
     results = response.json().get("results")
     if not results:
-        raise ValueError(f"Cidade '{city}' nao encontrada.")
+        raise ValueError(f"City '{city}' was not found.")
 
     return results[0]["latitude"], results[0]["longitude"]

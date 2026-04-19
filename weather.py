@@ -49,7 +49,7 @@ def validate_weather_data(current: dict | None) -> WeatherData:
             field is missing.
     """
     if not current:
-        raise ValueError("A API de clima nao retornou dados atuais.")
+        raise ValueError("The weather API did not return current conditions.")
 
     required_fields = (
         "temperature_2m",
@@ -63,7 +63,8 @@ def validate_weather_data(current: dict | None) -> WeatherData:
     if missing_fields:
         missing_fields_text = ", ".join(missing_fields)
         raise ValueError(
-            f"A API de clima retornou dados incompletos. Campos ausentes: {missing_fields_text}."
+            "The weather API returned incomplete data. "
+            f"Missing fields: {missing_fields_text}."
         )
 
     return current  # type: ignore[return-value]
@@ -72,15 +73,15 @@ def validate_weather_data(current: dict | None) -> WeatherData:
 def validate_forecast_data(daily: dict | None) -> ForecastData:
     """Validate that the API returned the daily forecast fields used by the app."""
     if not daily:
-        raise ValueError("A API de clima nao retornou a previsao diaria.")
+        raise ValueError("The weather API did not return a daily forecast.")
 
     required_fields = ("time", "temperature_2m_max", "temperature_2m_min")
     missing_fields = [field for field in required_fields if field not in daily]
     if missing_fields:
         missing_fields_text = ", ".join(missing_fields)
         raise ValueError(
-            "A API de clima retornou previsao diaria incompleta. "
-            f"Campos ausentes: {missing_fields_text}."
+            "The weather API returned an incomplete daily forecast. "
+            f"Missing fields: {missing_fields_text}."
         )
 
     return daily  # type: ignore[return-value]
